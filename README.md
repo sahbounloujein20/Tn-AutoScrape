@@ -13,10 +13,10 @@ TunisAutoScrape collecte automatiquement les annonces de voitures d'occasion pub
 ![Vue d'ensemble](screenshots/page1-overview.png)
 
 ### Analyse géographique
-![Analyse géographique](screenshots/page2-geography.png)
+![Analyse géographique](screenshots/page2-geography..png)
 
 ### Analyse des prix
-![Analyse des prix](screenshots/page3-prix.png)
+![Analyse des prix](screenshots/page3-prix..png)
 
 > 🎬 Une démo animée des filtres interactifs (énergie, boîte, gouvernorat) est disponible dans `screenshots/demo.gif`.
 
