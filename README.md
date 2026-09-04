@@ -1,102 +1,34 @@
 # Tn-AutoScrape
 
+**Used Car Market in Tunisia — scraping, database & Power BI dashboard**
 
-**Marché des voitures d'occasion en Tunisie — scraping, base de données & dashboard Power BI**
-
-TunisAutoScrape collecte automatiquement les annonces de voitures d'occasion publiées sur [automobile.tn](https://www.automobile.tn), les stocke dans une base SQL Server, puis les visualise dans un dashboard Power BI interactif : prix, énergie, kilométrage, puissance, boîte, et répartition par gouvernorat.
-
----
-
-## 📊 Aperçu du dashboard
-
-### Vue d'ensemble
-![Vue d'ensemble](screenshots/page1-overview.png)
-
-### Analyse géographique
-![Analyse géographique](screenshots/page2-geography..png)
-
-### Analyse des prix
-![Analyse des prix](screenshots/page3-prix..png)
-
-> 🎬 Une démo animée des filtres interactifs (énergie, boîte, gouvernorat) est disponible dans `screenshots/demo.gif`.
+TunisAutoScrape automatically collects used-car listings published on [automobile.tn](https://www.automobile.tn), stores them in a SQL Server database, and visualizes them in an interactive Power BI dashboard: price, fuel type, mileage, horsepower, gearbox, and distribution by governorate.
 
 ---
 
-## ⚙️ Fonctionnement
+## 📊 Dashboard Preview
 
-Le projet se déroule en 3 étapes :
+### Overview
+![Overview](screenshots/page1-overview.png)
 
-1. **Scraping** — Un spider Scrapy parcourt les pages d'annonces d'automobile.tn (avec pagination automatique) et suit chaque annonce individuellement pour en extraire le gouvernorat.
-2. **Nettoyage & stockage** — Un pipeline nettoie les champs (prix, kilométrage, encodage des accents) puis insère chaque annonce dans une table SQL Server, en ignorant les doublons.
-3. **Visualisation** — Power BI se connecte à la base et affiche les données sous forme de dashboard multi-pages.
+### Geographic Analysis
+![Geographic Analysis](screenshots/page2-geography..png)
 
----
+### Price Analysis
+![Price Analysis](screenshots/page3-prix..png)
 
-## 🗂️ Structure du projet
-
-```
-tunisautoscrape/
-├── carscrapper/
-│   ├── carspider.py       # Spider principal (pagination + détail annonce)
-│   ├── items.py           # Structure des champs extraits
-│   ├── pipelines.py       # Nettoyage des données + insertion SQL Server
-│   ├── middlewares.py     # Middlewares Scrapy par défaut
-│   ├── settings.py        # Configuration du spider (délais, headers, feeds)
-│   └── scrapy.cfg         # Config Scrapy
-├── power-bi/
-│   └── tunisautoscrape.pbix    # Dashboard Power BI
-├── screenshots/
-│   ├── page1-overview.png
-│   ├── page2-geography.png
-│   ├── page3-prix.png
-│   └── demo.gif
-└── README.md
-```
+> 🎬 An animated demo of the interactive filters (fuel type, gearbox, governorate) is available at `screenshots/demo.gif`.
 
 ---
 
-## 🧰 Stack technique
+## ⚙️ How It Works
 
-| Étape | Outils |
-|---|---|
-| Scraping | Python, Scrapy |
-| Nettoyage des données | Scrapy Pipelines, regex |
-| Stockage | SQL Server (pyodbc) |
-| Visualisation | Power BI Desktop |
+The project runs in 3 stages:
 
----
-
-## 📦 Champs collectés
-
-`titre`, `prix`, `année`, `kilométrage`, `boîte`, `énergie`, `puissance`, `transmission`, `gouvernorat`, `cote` (évaluation du prix), `lien` (annonce originale), `image`
+1. **Scraping** — A Scrapy spider crawls automobile.tn's listing pages (with automatic pagination) and follows each listing individually to extract its governorate.
+2. **Cleaning & storage** — A pipeline cleans the fields (price, mileage, accent encoding) then inserts each listing into a SQL Server table, skipping duplicates.
+3. **Visualization** — Power BI connects to the database and displays the data as a multi-page dashboard.
 
 ---
 
-## 🚀 Lancer le scraper
-
-```bash
-# Créer et activer l'environnement virtuel
-python -m venv venv
-venv\Scripts\activate      # Windows
-
-# Installer les dépendances
-pip install scrapy pyodbc
-
-# Lancer le spider
-cd carscrapper
-python carspider.py
-```
-
-> ⚠️ Le scraper respecte un délai entre les requêtes (`DOWNLOAD_DELAY`) pour ne pas surcharger le serveur. Adapte `SQLSERVER_HOST` / `SQLSERVER_DB` dans `settings.py` à ton propre environnement avant de lancer.
-
----
-
-## 📈 Ouvrir le dashboard
-
-Ouvre `power-bi/tunisautoscrape.pbix` avec [Power BI Desktop](https://powerbi.microsoft.com/desktop/) et connecte-le à ta base SQL Server locale.
-
----
-
-## ✍️ Auteure
-
-Projet réalisé par **Loujein** — étudiante en cycle ingénieur à l'ENSI (Tunisie).
+## 🗂️ Project Structure
